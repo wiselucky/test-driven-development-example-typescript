@@ -1,2 +1,6 @@
-# for projects that use SCons for building: http://http://www.scons.org/
-.sconsign.dblite
+.DS_STORE
+node_modules
+*~
+build/
+coverage/
+.vscode
