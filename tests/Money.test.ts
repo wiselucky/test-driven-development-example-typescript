@@ -66,6 +66,17 @@ describe("Money Clsss Test", () => {
     expect(1).toEqual(new Bank().rate("CHF", "CHF"));
   });
 
+  it("test mixed addtion", () => {
+    const fiveBucks: Expression = Money.doller(5);
+    const tenFrancs: Expression = Money.franc(10);
+
+    const bank = new Bank();
+    bank.addRate("CHF", "USD", 2);
+
+    const result: Money = bank.reduced(fiveBucks.plus(tenFrancs), "USD");
+    expect(Money.doller(10)).toEqual(result);
+  });
+
   it("test rate is nothing", () => {
     expect(0).toEqual(new Bank().rate("USD", "CHF"));
   });
