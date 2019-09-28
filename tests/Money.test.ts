@@ -21,7 +21,7 @@ describe("Money Clsss Test", () => {
     expect("CHF").toEqual(Money.franc(1).currency());
   });
 
-  it("simple addition", () => {
+  it("test simple addition", () => {
     const five: Money = Money.doller(5);
     const sum: Expression = five.plus(five);
     const bank = new Bank();
@@ -75,6 +75,32 @@ describe("Money Clsss Test", () => {
 
     const result: Money = bank.reduced(fiveBucks.plus(tenFrancs), "USD");
     expect(Money.doller(10)).toEqual(result);
+  });
+
+  it("test sum plus money", () => {
+    const fiveBucks: Expression = Money.doller(5);
+    const tenFrancs: Expression = Money.franc(10);
+
+    const bank = new Bank();
+    bank.addRate("CHF", "USD", 2);
+
+    const sum: Expression = new Sum(fiveBucks, tenFrancs).plus(fiveBucks);
+
+    const result = bank.reduced(sum, "USD");
+    expect(Money.doller(15)).toEqual(result);
+  });
+
+  it("test sum times", () => {
+    const fiveBucks: Expression = Money.doller(5);
+    const tenFrancs: Expression = Money.franc(10);
+
+    const bank = new Bank();
+    bank.addRate("CHF", "USD", 2);
+
+    const sum: Expression = new Sum(fiveBucks, tenFrancs).times(2);
+
+    const result = bank.reduced(sum, "USD");
+    expect(Money.doller(20)).toEqual(result);
   });
 
   it("test rate is nothing", () => {

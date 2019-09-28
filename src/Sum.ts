@@ -16,7 +16,11 @@ export class Sum implements Expression {
     return new Money(amount, to);
   }
 
-  public plus(addend: Expression) {
-    return new Sum(this.augend, this.addend);
+  public plus(addend: Expression): Expression {
+    return new Sum(this, addend);
+  }
+
+  public times(multiplier: number): Expression {
+    return new Sum(this.augend.times(multiplier), this.addend.times(multiplier));
   }
 }
