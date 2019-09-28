@@ -52,4 +52,21 @@ describe("Money Clsss Test", () => {
 
     expect(Money.doller(1)).toEqual(result);
   });
+
+  it("test reduce money different currency", () => {
+    const bank = new Bank();
+    bank.addRate("CHF", "USD", 2);
+    const result: Money = bank.reduced(Money.franc(2), "USD");
+
+    expect(Money.doller(1)).toEqual(result);
+  });
+
+  it("test identity rate", () => {
+    expect(1).toEqual(new Bank().rate("USD", "USD"));
+    expect(1).toEqual(new Bank().rate("CHF", "CHF"));
+  });
+
+  it("test rate is nothing", () => {
+    expect(0).toEqual(new Bank().rate("USD", "CHF"));
+  });
 });
